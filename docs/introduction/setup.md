@@ -25,9 +25,9 @@
 
 所以这里是你需要的主要部分:
 
-- 为您选择的DI框架实现 `IDependencyContainer` 。 [下面是一个例子](https://github.com/EcsRx/ecsrx/blob/master/src/EcsRx.Examples/Dependencies/NinjectDependencyContainer.cs)
+- 为您选择的DI框架实现 `IDependencyContainer` 。 [这是一个例子](https://github.com/EcsRx/ecsrx/blob/master/src/EcsRx.Examples/Dependencies/NinjectDependencyContainer.cs)
 
-- 实现您自己的 `EcsRxApplication` 类，给它一个 `IDependencyContainer` 实现来使用。[下面是一个例子](https://github.com/EcsRx/ecsrx/blob/master/src/EcsRx.Examples/Application/EcsRxConsoleApplication.cs)
+- 实现您自己的 `EcsRxApplication` 类，给它一个 `IDependencyContainer` 实现来使用。[这是一个例子](https://github.com/EcsRx/ecsrx/blob/master/src/EcsRx.Examples/Application/EcsRxConsoleApplication.cs)
 
 - 为需要创建的每个逻辑应用程序扩展自定义的 `EcsRxApplication` 实现，如EcsRx控制台示例所示
 
