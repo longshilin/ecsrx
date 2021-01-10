@@ -1,12 +1,14 @@
 # HELLO
 
-Welcome etc! 这里是 [ecsrx doc](https://ecsrx.gitbook.io/project/) 的中文版
+Welcome etc! 
+
+> 这里是 [ecsrx doc](https://ecsrx.gitbook.io/project/) 的中文版
 
 > 如果您在github中查看此内容，则可以查看其书籍版本 [HERE](https://longsl.gitbook.io/ecsrx-zh/)
 
 这是尝试记录有关如何使用该库的大多数重要内容的建议，建议您遵循目录的顺序，但是，如果您不使用gitbook版本，则只需查看summary.md文件并关注那个命令。
 
-The flow is generally:
+通常包括以下内容:
 
 - 在使用框架之前，您应该理想地了解的东西
 - 关于框架及其使用方法
