@@ -1,47 +1,47 @@
 # Setup
 
-If you are using Monogame or Unity you can just go and get the platform specific helpers which will out the box provide you most of the infrastructure and setup required to get going, so go look there.
+如果您使用的是Monogame或Unity，那么您可以直接获得特定于平台的帮助程序，这些帮助程序将为您提供启动所需的大部分基础设施和设置，所以请查看那里。
 
 ---
 
-If you are not using Unity or Monogame and want to pioneer into a new territory then its just a case of setting up the bits that are needed for the core parts of the system to run.
+如果您不使用Unity或Monogame，并且希望开拓一个新领域，那么这只是设置系统核心部分运行所需部分的示例。
 
-## Pre build infrastructure or not?
+## 是否预建基础设施？
 
-Out the box EcsRx comes with a load of infrastructure classes which simplify setup, if you are happy to use that as a basis for setup then your job becomes a bit simpler.
+开箱即用的EcsRx附带了大量简化安装的基础结构类，如果您愿意使用这些类作为安装的基础，那么您的工作就会变得简单一些。
 
-There is also a whole section in these docs around the infrastructure and how to use the application and other classes within there in common scenarios.
+这些文档中还有一个完整的部分，介绍了基础设施以及如何在常见场景中使用应用程序和其中的其他类。
 
-### YES I WANT ALL THE INFRASTRUCTURE PLX PLX
+### 是的，我要所有的基础设施
 
-A wise choice so to start with its advised that you take:
+一个明智的选择，因此建议您从以下几点开始：
 
 - `EcsRx`
 - `EcsRx.Infrastructure`
 - `EcsRx.Plugins.ReactiveSystems`
 - `EcsRx.Plugins.Views`
 
-This will provide the basic classes for you to extend, however one fundamental problem is that the infrastructure expects you to be using a DI framework. It doesn't really care which DI framework as it provides an interface for you to implement and then consume that in your own `EcsRxApplication` implementation.
+这将为您提供扩展的基本类，但是一个基本问题是，基础结构希望您使用DI框架。它实际上并不关心哪个DI框架，因为它提供了一个接口供您实现，然后在您自己的 `EcsRxApplication` 实现中使用。
 
-So here are the main bits you need:
+所以这里是你需要的主要部分:
 
-- Implement `IDependencyContainer` for your DI framework of choice. [Here is a Ninject one from examples](https://github.com/EcsRx/ecsrx/blob/master/src/EcsRx.Examples/Dependencies/NinjectDependencyContainer.cs)
+- 为您选择的DI框架实现 `IDependencyContainer` 。 [下面是一个例子](https://github.com/EcsRx/ecsrx/blob/master/src/EcsRx.Examples/Dependencies/NinjectDependencyContainer.cs)
 
-- Implement your own `EcsRxApplication` class, giving it an `IDependencyContainer` implementation to use. [Here is one from examples](https://github.com/EcsRx/ecsrx/blob/master/src/EcsRx.Examples/Application/EcsRxConsoleApplication.cs)
+- 实现您自己的 `EcsRxApplication` 类，给它一个 `IDependencyContainer` 实现来使用。[下面是一个例子](https://github.com/EcsRx/ecsrx/blob/master/src/EcsRx.Examples/Application/EcsRxConsoleApplication.cs)
 
-- Extend your custom `EcsRxApplication` implementation for each logical app you need to make, as shown in the EcsRx console examples
+- 为需要创建的每个逻辑应用程序扩展自定义的 `EcsRxApplication` 实现，如EcsRx控制台示例所示
 
-There are pre-made DI implementations for **Ninject** and **Zenject** so if you can use one of those on your platform GREAT! if not then just pick a DI framework of choice and implement your own handler for it (using the ninject one as an example to base it off).
+**Ninject** 和 **Zenject** 都有预先制作的DI实现，所以如果你能在你的平台上使用其中一个，那就太好了！如果没有，那么就选择一个DI框架并为它实现自己的处理程序（以ninject为例）。
 
-> So if you dont know what DI (Dependency Injection) is I recommend you go [read this](https://grofit.gitbooks.io/development-for-winners/content/development/dependency-patterns/dependency-injection.html) and [this](https://grofit.gitbooks.io/development-for-winners/content/development/dependency-patterns/inversion-of-control.html) which will give you a quick overview on what IoC (Inversion of Control) and DI is and how you use it.
+> 所以如果你不知道依赖注入是什么，我建议你去[读这个](https://grofit.gitbooks.io/development-for-winners/content/development/dependency-patterns/dependency-injection.html) 和 [这个](https://grofit.gitbooks.io/development-for-winners/content/development/dependency-patterns/inversion-of-control.html) 这将使您快速了解什么是IoC（控制反转）和DI，以及如何使用它。
 
-It is worth noting here that this is EXACTLY how the examples work in this project so its worth cracking them open to see how its all done, but the same principals can be applied to your own applications.
+这里值得注意的是，这正是本项目中示例的工作方式，因此打开这些示例以了解它们是如何完成的是值得的，但是相同的原则可以应用到您自己的应用程序中。
 
-### NOOOPE! I dont care for your design patterns sir, just let me get going
+### 不！我不喜欢你的设计模式，先生，让我走吧
 
-Ok captain, if you just want to get things going with minimum effort then I would just get the core lib and manually instantiate everything that is needed. 
+好的，队长，如果你只想用最小的努力来完成任务，那么我只需要得到核心库，并手动实例化所有需要的东西。
 
-This is like the most bare bones setup I would advise:
+这就像我建议的最简单的设置：
 
 ```csharp
 public abstract class EcsRxApplication
@@ -90,7 +90,7 @@ public abstract class EcsRxApplication
 }
 ```
 
-Then all you need to do is go:
+那你要做的就是下面这样:
 
 ```csharp
 public class HelloWorldExampleApplication : EcsRxApplication
@@ -108,4 +108,4 @@ public class HelloWorldExampleApplication : EcsRxApplication
 }
 ```
 
-HUZZAH! you are now up and running and you can make your own conventions or design patterns around this.
+HUZZAH！现在，您已经开始运行了，您可以围绕此创建自己的约定或设计模式。
