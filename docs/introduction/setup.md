@@ -25,7 +25,7 @@
 
 所以这里是你需要的主要部分:
 
-- 为您选择的DI框架实现 `IDependencyContainer` 。 [这是一个例子](https://github.com/EcsRx/ecsrx/blob/master/src/EcsRx.Examples/Dependencies/NinjectDependencyContainer.cs)
+- 为您选择的DI框架实现 `IDependencyContainer` 。 [这是一个例子](https://github.com/EcsRx/ecsrx/blob/master/src/EcsRx.Infrastructure.Ninject/NinjectDependencyContainer.cs)
 
 - 实现您自己的 `EcsRxApplication` 类，给它一个 `IDependencyContainer` 实现来使用。[这是一个例子](https://github.com/EcsRx/ecsrx/blob/master/src/EcsRx.Examples/Application/EcsRxConsoleApplication.cs)
 
@@ -33,7 +33,7 @@
 
 **Ninject** 和 **Zenject** 都有预先制作的DI实现，所以如果你能在你的平台上使用其中一个，那就太好了！如果没有，那么就选择一个DI框架并为它实现自己的处理程序（以ninject为例）。
 
-> 所以如果你不知道依赖注入是什么，我建议你去[读这个](https://grofit.gitbooks.io/development-for-winners/content/development/dependency-patterns/dependency-injection.html) 和 [这个](https://grofit.gitbooks.io/development-for-winners/content/development/dependency-patterns/inversion-of-control.html) 这将使您快速了解什么是IoC（控制反转）和DI，以及如何使用它。
+> 所以如果你不知道依赖注入是什么，我建议你去[读这个](https://grofit.gitbooks.io/development-for-winners/content/development/general/dependency-patterns/dependency-injection.html) 和 [这个](https://grofit.gitbooks.io/development-for-winners/content/development/general/dependency-patterns/inversion-of-control.html) 这将使您快速了解什么是IoC（控制反转）和DI，以及如何使用它。
 
 这里值得注意的是，这正是本项目中示例的工作方式，因此打开这些示例以了解它们是如何完成的是值得的，但是相同的原则可以应用到您自己的应用程序中。
 
