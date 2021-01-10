@@ -1,21 +1,21 @@
 # HELLO
 
-Welcome etc!
+Welcome etc! 这里是 [ecsrx doc](https://ecsrx.gitbook.io/project/) 的中文版
 
-> If you are viewing this in github you can view the book version of it [HERE](https://ecsrx.gitbook.io/project/)
+> 如果您在github中查看此内容，则可以查看其书籍版本 [HERE](https://longsl.gitbook.io/ecsrx-zh/)
 
-This is an attempt to document most of the important stuff around how to use the library, it is recommended that you follow the order of the TOC, however if you are not using the gitbook version then just look at the summary.md file and follow that order.
+这是尝试记录有关如何使用该库的大多数重要内容的建议，建议您遵循目录的顺序，但是，如果您不使用gitbook版本，则只需查看summary.md文件并关注那个命令。
 
 The flow is generally:
 
-- Stuff you should ideally know before using the framework
-- About the framework and how to use it
-- The bits which make up the framework and how to use them
-- Making larger applications with the framework
-- How the underlying architecture fits together
-- How you can extend the framework and use plugins
-- How to use the framework in a more performance oriented manner
-- Other guff
+- 在使用框架之前，您应该理想地了解的东西
+- 关于框架及其使用方法
+- 构成框架的各个组成部分以及如何使用它们
+- 使用框架制作更大的应用程序
+- 基础架构如何融合在一起
+- 如何扩展框架和使用插件
+- 如何以更注重性能的方式使用框架
+- 其他内容
 
-Feel free to add to the docs or come on the [Discord Channel](https://discord.gg/bS2rnGz) if you need help!
+如果需要帮助，可以随时添加到文档中或进入[Discord Channel](https://discord.gg/bS2rnGz)
 
