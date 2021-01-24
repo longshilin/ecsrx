@@ -1,28 +1,28 @@
 # Groups
 
-To access entities from entity collection we have the notion of groups (implementations of `IGroup`). As every *system* requires a group to access entities they are quite an important piece of the puzzle.
+为了从实体集合访问实体，我们具有组的概念（“ IGroup”的实现）。由于每个系统都需要一个组来访问实体，因此它们是一个相当重要的难题。
 
-So for example lets say that I wanted the notion of a `Player`, that may actually be expressed as an entity with `IsPlayerControlled`, `IsSceneActor`, `HasStatistics` components. If we were to pretend that `IsPlayerControlled` means that the player controls this entity, the `IsSceneActor` implies that you have a `GameObject` in the scene which does some random stuff, and `HasStatistics` which contains information like Health, Mana, Strength etc. Now if we assume a `Player` group is expressed with those, you could express an `NPC` as an entity with just `IsSceneActor` and `HasStatistics`, so this way you can look at your entities in a high level way but making the best use of your more granular components.
+例如，假设我想要一个“ Player”的概念，它实际上可以表示为具有“ IsPlayerControlled”，“ IsSceneActor”和“ HasStatistics”组件的实体。如果我们假装说“ IsPlayerControlled”意味着玩家控制了这个实体，那么“ IsSceneActor”就意味着您在场景中拥有一个“ GameObject”，它会做一些随机的事情，而“ HasStatistics”则包含诸如健康，法力，强度等。现在，如果我们假设用它们表示“玩家”组，则可以将“ NPC”表示为仅具有“ IsSceneActor”和“ HasStatistics”的实体，这样您就可以从高层次看待您的实体但最好地利用更细粒度的组件。
 
 ## How groups work
 
-So groups are pretty simple, they are just POCOs which describe the component types that you wish to match from within the collection of entities. So if you have hundreds of entities all with different components you can use a group as a way of expressing a high level intent for a system. 
+因此，组非常简单，它们只是POCO，它们描述了您希望从实体集合中匹配的组件类型。因此，如果您有数百个实体，每个实体都具有不同的组件，则可以使用组来表达系统的高级意图。
 
-So *Entity Collections* expose a way to pass a group in and get entities matching that group back, as mentioned the primary matching mechanism is via component but there is also the notion of entity matching, which is more experimental, and you can find out more about these further down this page.
+因此，实体集合提供了一种传递组并获取与该组匹配的实体的方法，如前所述，主要的匹配机制是通过组件实现的，但还有实体匹配的概念，这是实验性的，您可以找到更多关于这些在此页面的下方。
 
 ## Creating Groups
 
-There are a few different ways to create a group, here are some of the common ways.
+创建组有几种不同的方法，以下是一些常用方法。
 
 ### Instantiate a group
 
-There is a `Group` class which implements `IGroup`, this can be instantiated and passed any of the components you want to target, like so:
+有一个实现“ IGroup”的“ Group”类，可以实例化该类并传递您要定位的任何组件，例如：
 
 ```csharp
 var group = new Group(typeof(SomeComponent));
 ```
 
-There are also some helper methods here so you can add component types if needed via extension methods, like so:
+这里还有一些辅助方法，因此您可以根据需要通过扩展方法添加组件类型，如下所示：
 
 ```csharp
 var group = new Group()
@@ -30,11 +30,11 @@ var group = new Group()
     .WithoutComponent<SomeOtherComponent();
 ```
 
-This is a halfway house between the builder approach and the instantiation approach, which is often handy if you want to quickly create a new group from an existing one. It also supports adding many components at once via params if needed.
+这是构建器方法和实例化方法之间的过渡，如果您想从现有组中快速创建新组，这通常很方便。如果需要，它还支持通过参数一次添加许多组件。
 
 ### Use the GroupBuilder
 
-So there is also a `GroupBuilder` class which can simplify making complex groups, it is easy to use and allows you to express complex group setups in a fluent manner, like so:
+因此，还有一个`GroupBuilder`类，可以简化创建复杂的组的过程，易于使用，并允许您流畅地表达复杂的组设置，如下所示：
 
 ```csharp
 var group = new GroupBuilder()
@@ -45,9 +45,9 @@ var group = new GroupBuilder()
 
 ### Implement your own IGroup
 
-So if you are going to be using the same groupings a lot, it would probably make sense to make your own implementation of `IGroup`, this will mean less faffing with the above concepts to build a group.
+因此，如果您将大量使用相同的分组，则可以自己实现IGroup，这将意味着减少使用上述概念来构建分组的麻烦。
 
-It is quite simple to make your own group, you just need to implement the 2 getters:
+创建自己的组非常简单，只需实现两个getter：
 
 ```csharp
 public class MyGroup : IGroup
@@ -58,18 +58,18 @@ public class MyGroup : IGroup
 }
 ```
 
-As you can see, you can now just instantiate `new MyGroup();` and everyone is happy.
+如您所见，您现在可以实例化`new MyGroup（）;`，每个人都很高兴。
 
 ## Required/Excluded Components and TargettedEntities
 
-So as mentioned most entities and constrained by their component types, this is the `RequiredComponents` and `ExcludedComponents` parts, however there is also a `TargettedEntities` notion, which basically takes the constraining a step further and allows you to constrain further on the entities matching the components.
+因此，正如大多数实体所提到的，受其组件类型的约束，这是“ RequiredComponents”和“ ExcludedComponents”部分，但是还有一个“ TargettedEntities”概念，该概念从本质上讲进一步约束了一步，使您可以进一步约束匹配组件的实体。
 
-The `TargettedEntities` property is just a predicate that takes an entity, and returns if it matches or not. Currently these are checked before subscriptions are passed to the system to execute, so you can express some complex constraints without having to be specific in each system.
+TargettedEntities属性只是一个接受实体的谓词，如果匹配或不匹配，则返回。当前，在将订阅传递给系统执行之前会检查这些内容，因此您可以表达一些复杂的约束，而不必在每个系统中都明确。
 
-So for example lets say you wanted a system which would only react to characters with `health == 0`, you could have the component based grouping and then in your system reaction or execution phase check to see if the health == 0 and if not return, however if you had 2 systems wanting to react to the notion of a character death you would end up duplicating your code a lot.
+因此，例如，假设您想要一个仅对带有“ health == 0”的字符作出反应的系统，您可以进行基于组件的分组，然后在系统反应或执行阶段检查一下health == 0以及是否不会返回，但是如果您有2个系统希望对字符死亡的概念做出反应，那么最终将导致大量重复代码。
 
-So this is where this functionality pays dividends as you can express this collation at a group level, so you can then make sure your systems will not even execute on the entities unless the predicate is matched.
+因此，此功能可为您带来好处，因为您可以在组级别表达此排序规则，因此可以确保除非谓词匹配，否则系统甚至不会在实体上执行。
 
 ### Warning
 
-Currently this was implemented as it gives a nicer way to express high level grouping logic, however there may be some niche use-cases where this causes more confusion than it should, so this feature may be removed or changed slightly going forward as there is computed groups which has some overlap with this sort of functionality.
+目前已实现此功能，因为它提供了一种更好的方式来表达高级分组逻辑，但是可能会出现一些利基用例，这些情况会引起比应有的混乱，因此，随着计算的进行，此功能可能会被删除或更改。组与这种功能有些重叠。

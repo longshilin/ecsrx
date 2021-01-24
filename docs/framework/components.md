@@ -1,11 +1,11 @@
 # Components
 
-Components are the data containers in the ECS world and should only contain some properties to contain data, there should be no logic in components, if there is logic then you are probably a bad man and need to step away from the computer.
+组件是ECS世界中的数据容器，应该只包含一些属性来包含数据，组件中应该没有逻辑，如果有逻辑那你可能是坏人，需要远离电脑。
 
 ## Using components
 
-You will need to make your own implementations of `IComponent` which encapsulate the data your components need to expose to the systems. It is fairly simple really just implement `IComponent` and it just does its stuff.
+您需要自己实现`IComponent`，它封装了组件需要向系统公开的数据。其实实现`IComponent`就相当简单了，它只做自己的事情。
 
 ## Composition
 
-So the whole point behind components are that they can contain anything, so if you need to contain complex data it would make sense to go write a c# POCO somewhere to encapsulate your data then just include that via composition inside your component.
+因此，组件背后的要点是它们可以包含任何内容，因此如果您需要包含复杂的数据，那么可以在某处编写一个C# POCO来封装您的数据，然后通过组件内部的组合来包含它。
